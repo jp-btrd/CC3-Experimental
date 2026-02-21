@@ -6,14 +6,14 @@ public class Repository {
 
     public Repository() {
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:studentss.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:students.db");
         } catch (SQLException e) {
             System.out.println("Connection Error: " + e.getMessage());
         }
     }
 
     public void saveStudent(Student s) {
-        String sql = "INSERT OR REPLACE INTO studentss VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT OR REPLACE INTO students VALUES(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, s.getId());
             ps.setString(2, s.getFirstName());
@@ -33,7 +33,7 @@ public class Repository {
 
     public List<Student> getAllStudents() {
         List<Student> list = new ArrayList<>();
-        String query = "SELECT * FROM studentss";
+        String query = "SELECT * FROM students";
 
         try (Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(query)) {
